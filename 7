@@ -1,0 +1,17 @@
+eigen_values, eigen_vectors = np.linalg.eig(np.linalg.inv(Sw).dot(Sb))
+idx = np.argsort(eigen_values)[::-1]
+eigen_values = eigen_values[idx]
+eigen_vectors = eigen_vectors[:, idx]
+k = 2
+eigen_vectors_selected = eigen_vectors[:, :k]
+X_lda = X_std.dot(eigen_vectors_selected)
+print("Eigenvalues:")
+print(eigen_values)
+print("Eigenvectors:")
+print(eigen_vectors)
+import matplotlib.pyplot as plt
+plt.scatter(X_lda[:, 0], X_lda[:, 1], c=y)
+plt.xlabel("LD1")
+plt.ylabel("LD2")
+plt.title("LDA")
+plt.show()
